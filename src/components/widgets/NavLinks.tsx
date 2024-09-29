@@ -11,7 +11,7 @@ const NavLinks = ({ pathName }: { pathName: string }) => {
             href={link.href!}
             target={link.isOpenInNewTab ? "_blank" : "_self"}
             className={cn(
-              "hover:text-gray-900",
+              "capitalize hover:text-gray-900",
               pathName === link.href && "font-semibold"
             )}
           >

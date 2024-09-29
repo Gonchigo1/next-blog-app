@@ -4,6 +4,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
@@ -38,6 +39,7 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
+              <SheetTitle></SheetTitle>
               <SheetDescription>
                 {navLinks.map((link) => (
                   <Link
@@ -45,7 +47,7 @@ const Navbar = () => {
                     href={link.href!}
                     target={link.isOpenInNewTab ? "_blank" : "_self"}
                     className={cn(
-                      "block py-2",
+                      "block py-2 capitalize",
                       pathName === link.href && "font-semibold"
                     )}
                   >

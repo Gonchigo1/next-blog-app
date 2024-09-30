@@ -7,6 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -15,15 +16,21 @@ import Link from "next/link";
 
 type NavLink = {
   title: string;
-  href: string;
+  getValue(): string | JSX.Element;
   isOpenInNewTab?: boolean;
 };
 
 export const navLinks: NavLink[] = [
-  { title: "blog", href: "/" },
-  { title: "about", href: "/about" },
-  { title: "sign in", href: "" },
-  { title: "icon", href: "" },
+  { title: "blog", getValue: () => "/" },
+  { title: "about", getValue: () => "/about" },
+  {
+    title: "login",
+    getValue: () => (
+      <Button className={cn("block py-2 ml-2")} variant="ghost">
+        Login
+      </Button>
+    ),
+  },
 ];
 
 const Navbar = () => {
@@ -41,19 +48,27 @@ const Navbar = () => {
             <SheetHeader>
               <SheetTitle></SheetTitle>
               <SheetDescription>
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.href!}
-                    target={link.isOpenInNewTab ? "_blank" : "_self"}
-                    className={cn(
-                      "block py-2 capitalize",
-                      pathName === link.href && "font-semibold"
-                    )}
-                  >
-                    {link.title}
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  if (link.title !== "login") {
+                    const value = link.getValue() as string;
+
+                    return (
+                      <Link
+                        key={link.title}
+                        href={value}
+                        target={link.isOpenInNewTab ? "_blank" : "_self"}
+                        className={cn(
+                          "block py-2 capitalize",
+                          pathName === value && "font-semibold"
+                        )}
+                      >
+                        {link.title}
+                      </Link>
+                    );
+                  }
+
+                  return link.getValue() as JSX.Element;
+                })}
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

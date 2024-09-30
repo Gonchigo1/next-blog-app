@@ -16,7 +16,7 @@ import Link from "next/link";
 
 type NavLink = {
   title: string;
-  getValue(): string | JSX.Element;
+  getValue(styles?: string): string | JSX.Element;
   isOpenInNewTab?: boolean;
 };
 
@@ -25,10 +25,8 @@ export const navLinks: NavLink[] = [
   { title: "about", getValue: () => "/about" },
   {
     title: "login",
-    getValue: () => (
-      <Button className={cn("block py-2 ml-2")} variant="ghost">
-        Login
-      </Button>
+    getValue: (styles: string) => (
+      <Button className={cn(`block py-2 ${styles}`)}>Login</Button>
     ),
   },
 ];
@@ -58,7 +56,7 @@ const Navbar = () => {
                         href={value}
                         target={link.isOpenInNewTab ? "_blank" : "_self"}
                         className={cn(
-                          "block py-2 capitalize",
+                          "block py-2 ps-3 capitalize",
                           pathName === value && "font-semibold"
                         )}
                       >
@@ -67,7 +65,7 @@ const Navbar = () => {
                     );
                   }
 
-                  return link.getValue() as JSX.Element;
+                  return link.getValue("ms-0 mt-3") as JSX.Element;
                 })}
               </SheetDescription>
             </SheetHeader>

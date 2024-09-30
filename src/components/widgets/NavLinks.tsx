@@ -26,7 +26,7 @@ const NavLinks = ({ pathName }: { pathName: string }) => {
           );
         }
 
-        return link.getValue() as JSX.Element;
+        return link.getValue("ms-10") as JSX.Element;
       })}
     </div>
   );

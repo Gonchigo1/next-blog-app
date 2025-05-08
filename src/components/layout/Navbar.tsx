@@ -21,14 +21,22 @@ type NavLink = {
 };
 
 export const navLinks: NavLink[] = [
-  { title: "blog", getValue: () => "/" },
-  { title: "about", getValue: () => "/about" },
+  { title: "Самнах ажиллагааны тухай", getValue: () => "/" },
+  { title: "Тооцоолол", getValue: () => "/calculate" },
+  { title: "Бидний тухай", getValue: () => "/about" },
   {
     title: "login",
     getValue: (styles: string) => (
       <Button className={cn(`block py-2 ${styles}`)}>Login</Button>
     ),
   },
+  {
+    title: "register",
+    getValue: (styles: string) => (
+      <Button className={cn(`block py-2 ${styles}`)}>Register</Button>
+    ),
+  },
+  
 ];
 
 const Navbar = () => {

@@ -54,13 +54,13 @@ const Navbar = () => {
             <SheetHeader>
               <SheetTitle></SheetTitle>
               <SheetDescription>
-                {navLinks.map((link) => {
+                {navLinks.map((link,index) => {
                   if (link.title !== "login") {
                     const value = link.getValue() as string;
 
                     return (
                       <Link
-                        key={link.title}
+                        key={`${link.title}-${index}`}
                         href={value}
                         target={link.isOpenInNewTab ? "_blank" : "_self"}
                         className={cn(

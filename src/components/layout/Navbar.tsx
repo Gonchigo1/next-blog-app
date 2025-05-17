@@ -22,7 +22,7 @@ type NavLink = {
 
 export const navLinks: NavLink[] = [
   { title: "Самнах ажиллагааны тухай", getValue: () => "/" },
-  { title: "Тооцоолол", getValue: () => "/calculate" },
+  { title: "ЧММ-450-4 Тооцоолол", getValue: () => "/calculate" },
   { title: "Бидний тухай", getValue: () => "/about" },
   {
     title: "login",

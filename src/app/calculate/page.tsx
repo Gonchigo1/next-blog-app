@@ -308,6 +308,15 @@ const [imageErrors, setImageErrors] = useState<Record<ImageErrorKey, boolean>>({
               Зургийн байршил: /images/2.jpg
             </Text>
           </div>
+          <p>
+  <b>P</b>  Хүчийг хоёр бүрэлдэхүүн хүчээр задлахад:
+  <br></br>
+    <b>S хүч</b> Шүдийн урд ирмэгийн дагуу чиглэсэн 
+    <br>
+    </br>
+        <b>N хүч</b> Урд ирмэгт перпендикуляр чиглэсэн
+
+</p>
         </div>
         
         <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
@@ -322,6 +331,7 @@ const [imageErrors, setImageErrors] = useState<Record<ImageErrorKey, boolean>>({
 
     <div className="flex flex-col md:flex-row gap-8">
       <div className="w-full md:w-1/2 space-y-6">
+
 
        <Title level={4}>n₁₀ тооцоолох</Title>
         <Form layout="vertical" onFinish={calculateN10}>

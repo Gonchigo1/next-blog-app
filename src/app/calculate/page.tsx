@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Button, InputNumber, Typography, Form, message,Card } from "antd";
+import { Button, InputNumber, Typography, Form, message } from "antd";
 const {Text } = Typography;
 
   import Image from 'next/image';
-import { cos, pi } from 'mathjs';
 
 const { Title } = Typography;
 
@@ -151,7 +150,7 @@ const calculateN11 = (values : { zx: number }) => {
   message.success("n₁₁ амжилттай тооцоологдлоо");
 };
 
-const calculateW = (values : { zx: number }) => {
+const calculateW = () => {
   if (n10 === null) {
     message.error("n10-ийн утга эхлээд тооцоологдсон байх ёстой.");
     return;
@@ -174,7 +173,7 @@ const calculateW = (values : { zx: number }) => {
 };
 
 
-const calculate8w = (values : { zx: number }) => {
+const calculate8w = () => {
   if (n8 === null) {
     message.error("n8-ийн утга эхлээд тооцоологдсон байх ёстой.");
     return;
@@ -227,22 +226,22 @@ const resultFfp = resultFP / 0.23;
   setFfp(parseFloat(resultFfp.toFixed(2)));
 };
 
-const [imageErrors, setImageErrors] = useState({
+type ImageErrorKey = 'my-image' | '1' | '2';
+
+const [imageErrors, setImageErrors] = useState<Record<ImageErrorKey, boolean>>({
     'my-image': false,
     '1': false,
     '2': false
   });
 
-  // Handle image loading errors
-  const handleImageError = (imageName) => {
+  const handleImageError = (imageName: ImageErrorKey) => {
     setImageErrors(prev => ({
       ...prev,
       [imageName]: true
     }));
   };
 
-  // Image component with error handling
-  const ImageWithFallback = ({ src, alt, imageName }) => {
+  const ImageWithFallback = ({ src, alt, imageName }: { src: string; alt: string; imageName: ImageErrorKey }) => {
     if (imageErrors[imageName]) {
       return (
         <div className="w-full h-64 flex items-center justify-center border border-dashed border-gray-400 bg-gray-50 rounded-lg">

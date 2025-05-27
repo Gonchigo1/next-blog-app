@@ -23,7 +23,8 @@ const CalculateForm = () => {
   const [w, setW] = useState<number | null>(null);
     const [f, setF] = useState<number | null>(null);
 
-    
+      const [angle, setAngle] = useState<number>(80); // default value
+
   const [w8, setW8] = useState<number | null>(null);
     const [f8, setF8] = useState<number | null>(null);
   const [p, setP] = useState<number | null>(null);
@@ -200,12 +201,18 @@ const calculateP = () => {
     message.error("f-ийн утга эхлээд тооцоологдсон байх ёстой.");
     return;
   }
-    const angleDegrees = 80;
-    const angleRadians = angleDegrees * (Math.PI / 180); 
+    if (angle === null || isNaN(angle)) {
+      message.error("Өнцгийн утгыг зөв оруулна уу.");
+      return;
+    }
+    const angleRadians = angle * (Math.PI / 180);
     const cosValue = Math.cos(angleRadians);
 
-    const result = f / cosValue;
-
+     if (cosValue === 0) {
+      message.error("cos(θ) нь 0 байж болохгүй.");
+      return;
+    }
+ const result = f / cosValue;
     const resultFP = f / 0.23;
     setP(parseFloat(result.toFixed(2)));
     setFf(parseFloat(resultFP.toFixed(2)));
@@ -357,32 +364,49 @@ const [imageErrors, setImageErrors] = useState<Record<ImageErrorKey, boolean>>({
           </div>
         )}
 
-        <Title level={4}>10 барабана тооцоолох</Title>
-        <Form layout="vertical" onFinish={calculateW}>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" disabled={n10 === null}>
-              F тооцоолох
-            </Button>
-          </Form.Item>
-        </Form>
+       <Title level={4}>10 барабана тооцоолох</Title>
+      <Form layout="vertical" onFinish={calculateW}>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={n10 === null}>
+            F тооцоолох
+          </Button>
+        </Form.Item>
+      </Form>
 
-        {w !== null && (
-          <div className="text-lg font-semibold text-green-700 bg-yellow-100 p-4 rounded-xl">
-            <div>Тооцооны үр дүн (W): {w} рад</div>
-            <div>Тооцооны үр дүн (F): {f} H</div>
-          </div>
-        )}
+      {w !== null && (
+        <div className="text-lg font-semibold text-green-700 bg-yellow-100 p-4 rounded-xl">
+          <div>Тооцооны үр дүн (W): {w} рад</div>
+          <div>Тооцооны үр дүн (F): {f} H</div>
+        </div>
+      )}
 
-        <Title level={4}>тооцоолох</Title>
-        <Button type="primary" onClick={calculateP}>
-          тооцоолох
-        </Button>
-        {p !== null && Ff !== null && (
+      <Title level={4}>тооцоолох</Title>
+
+      <div className="flex gap-4 items-center mb-4">
+        <InputNumber
+          min={0}
+          max={90}
+          value={angle}
+          onChange={(val) => setAngle(val ?? 0)}
+          placeholder="Өнцөг (градусаар)"
+        />
+        
+      </div>
+
+      <Button type="primary" onClick={calculateP}>
+        тооцоолох
+      </Button>
+
+      {p !== null && Ff !== null && (
+        <div className="mt-4">
           <p>
             Үр дүн: <strong>P ≈ {p}</strong>
-            <div>Үр дүн: <strong>N ≈ {Ff}</strong></div>
           </p>
-        )}
+          <div>
+            Үр дүн: <strong>N ≈ {Ff}</strong>
+          </div>
+        </div>
+      )}
 
        
 

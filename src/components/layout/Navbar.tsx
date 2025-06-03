@@ -21,8 +21,8 @@ type NavLink = {
 };
 
 export const navLinks: NavLink[] = [
-  { title: "Самнах ажиллагааны тухай", getValue: () => "/" },
-  { title: "Самнах машины Тооцоолол", getValue: () => "/calculate" },
+  { title: "Самнах машины онол", getValue: () => "/" },
+  { title: "Самнах машины тооцоолол", getValue: () => "/calculate" },
   { title: "Бидний тухай", getValue: () => "/about" },
   {
     title: "login",
